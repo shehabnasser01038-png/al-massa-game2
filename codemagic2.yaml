@@ -1,0 +1,15 @@
+workflows:
+  my-custom-workflow:
+    name: Build Shahab Game
+    max_build_duration: 10
+    instance_type: mac_mini_m1
+    triggering:
+      events:
+        - push
+    scripts:
+      - name: Create Android Folder and Build APK
+        script: |
+          flutter create . --platforms=android
+          flutter build apk --debug -t main.dart
+    artifacts:
+      - build/**/outputs/**/*.apk
